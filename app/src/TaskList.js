@@ -7,19 +7,24 @@ function TaskList() {
 
     useEffect(() => {
         async function fetchData() {
-            const response = await axios.get('http://localhost:5000/tasks');
-            //const response = await axios.get('https://game-it-three.vercel.app/tasks');
-            setTasks(response.data);
-            console.log(response);
+            try {
+                const response = await axios.get('/tasks'); // Relative URL, works for both local and deployed environments
+                setTasks(response.data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
         }
         fetchData();
     }, []);
 
     const addTask = async () => {
-        await axios.post('http://localhost:5000/tasks', { text: newTask });
-        //await axios.post('https://game-it-three.vercel.app/tasks', { text: newTask });
-        setNewTask('');
-        window.location.reload();
+        try {
+            await axios.post('/tasks', { text: newTask }); // Relative URL, works for both local and deployed environments
+            setNewTask('');
+            fetchData(); // Refresh tasks after adding a new one, without reloading the entire page
+        } catch (error) {
+            console.error('Error adding task:', error);
+        }
     };
 
     return (
