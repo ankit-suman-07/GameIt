@@ -7,7 +7,8 @@ function TaskList() {
 
     useEffect(() => {
         async function fetchData() {
-            const response = await axios.get('https://game-it-three.vercel.app/tasks');
+            const response = await axios.get('http://localhost:5000/tasks');
+            //const response = await axios.get('https://game-it-three.vercel.app/tasks');
             setTasks(response.data);
             console.log(response);
         }
@@ -15,7 +16,8 @@ function TaskList() {
     }, []);
 
     const addTask = async () => {
-        await axios.post('https://game-it-three.vercel.app/tasks', { text: newTask });
+        await axios.post('http://localhost:5000/tasks', { text: newTask });
+        //await axios.post('https://game-it-three.vercel.app/tasks', { text: newTask });
         setNewTask('');
         window.location.reload();
     };
