@@ -21,7 +21,7 @@ function TaskList() {
         try {
             await axios.post('/tasks', { text: newTask }); // Relative URL, works for both local and deployed environments
             setNewTask('');
-            fetchData(); // Refresh tasks after adding a new one, without reloading the entire page
+            //fetchData(); // Refresh tasks after adding a new one, without reloading the entire page
         } catch (error) {
             console.error('Error adding task:', error);
         }
